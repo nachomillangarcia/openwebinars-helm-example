@@ -1,0 +1,17 @@
+apiVersion: skaffold/v1beta11
+kind: Config
+build:
+  artifacts:
+    - image: localhost:32000/myapp
+      sync:
+        manual:
+        - src: "app.py"
+          dest: /usr/src/app
+
+deploy:
+  helm:
+    releases:
+      - name: local-myapp
+        chartPath: helm-chart
+        values:
+          image: localhost:32000/myapp
