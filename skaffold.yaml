@@ -1,4 +1,4 @@
-apiVersion: skaffold/v1beta11
+apiVersion: skaffold/v1beta12
 kind: Config
 build:
   artifacts:
@@ -15,3 +15,9 @@ deploy:
         chartPath: helm-chart
         values:
           image: localhost:32000/myapp
+
+portForward:
+- resourceType: deployment
+  resourceName: local-myapp-server
+  port: 5000
+  localPort: 5000
